@@ -1,6 +1,6 @@
 {
-    "name": "jesperoestergaardjensen/photocentral-synology-storage",
-    "description": "Synology NAS storage for PhotoCentral",
+    "name": "jesperoestergaardjensen/photocentral-synology-storage-client",
+    "description": "Synology NAS storage for PhotoCentral, Client",
     "license": "gpl-3.0",
     "minimum-stability": "dev",
     "require": {
@@ -11,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PhotoCentralSimpleLinuxStorage\\": "src/"
+            "PhotoCentralSynologyStorageClient\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PhotoCentralSimpleLinuxStorage\\Tests\\": "tests/"
+            "PhotoCentralSynologyStorageClient\\Tests\\": "tests/"
         }
     },
     "require-dev": {

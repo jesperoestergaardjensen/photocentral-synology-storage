@@ -1,2 +1,2 @@
-# photocentral-synology-storage
-Synology NAS storage for PhotoCentral 
+# photocentral-synology-storage-client
+Synology NAS storage for PhotoCentral, Client part. 
