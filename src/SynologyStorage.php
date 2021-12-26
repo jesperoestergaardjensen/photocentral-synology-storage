@@ -3,7 +3,6 @@
 namespace PhotoCentralSynologyStorageClient;
 
 use PhotoCentralStorage\Model\ImageDimensions;
-use PhotoCentralStorage\Model\PhotoSorting\PhotoSorting;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
 
@@ -20,13 +19,13 @@ class SynologyStorage implements PhotoCentralStorage
         $this->base_path = $base_path;
     }
 
-    public function searchPhotos(string $search_string, int $limit = 10): array
+    public function searchPhotos(string $search_string, ?array $photo_collection_id_list, int $limit = 10): array
     {
         $url = $this->getBaseUrl() . '/Search.php';
         $post_parameters = [
             'search_string' => $search_string,
-            'limit'         => $limit
-            //'photo_collection_id_list' => [],
+            'limit'         => $limit,
+            'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
         $photo_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
@@ -38,12 +37,16 @@ class SynologyStorage implements PhotoCentralStorage
         return $photo_list;
     }
 
-    public function listPhotos(array $photo_filters = null, PhotoSorting $photo_sorting = null, int $limit = 5): array
+    public function listPhotos(
+        array $photo_filters = null,
+        array $photo_sorting_parameters = null,
+        int $limit = 5
+    ): array
     {
         return [];
     }
 
-    public function getPhoto(string $photo_uuid): Photo
+    public function getPhoto(string $photo_uuid, string $photo_collection_id): Photo
     {
         return new Photo('abc', '1', 100, 200, 0, time(), time(), null, null, null, null);
     }
@@ -63,13 +66,17 @@ class SynologyStorage implements PhotoCentralStorage
         return [];
     }
 
-    public function getPhotoPath(string $photo_uuid, ImageDimensions $image_dimensions): string
-    {
+    public function getPhotoPath(
+        string $photo_uuid,
+        string $photo_collection_id,
+        ImageDimensions $image_dimensions
+    ): string {
         $url = $this->getBaseUrl() . '/GetPhotoPath.php';
 
         $post_parameters = [
-            'photo_uuid'       => $photo_uuid,
-            'image_dimensions' => $image_dimensions,
+            'photo_uuid'          => $photo_uuid,
+            'photo_collection_id' => $photo_collection_id,
+            'image_dimensions'    => $image_dimensions,
         ];
 
         return $this->doPostRequestWithJsonResponse($url, $post_parameters);

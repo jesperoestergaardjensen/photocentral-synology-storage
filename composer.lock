@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jesperoestergaardjensen/photocentral-storage.git",
-                "reference": "b102eba2a6314f8c933044712e87284341a1bda7"
+                "reference": "70c2046e398f813f82472eb23df94e312910ea8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/b102eba2a6314f8c933044712e87284341a1bda7",
-                "reference": "b102eba2a6314f8c933044712e87284341a1bda7",
+                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/70c2046e398f813f82472eb23df94e312910ea8d",
+                "reference": "70c2046e398f813f82472eb23df94e312910ea8d",
                 "shasum": ""
             },
             "require": {
@@ -42,9 +42,9 @@
             "description": "Repository that define photo storage(s) for PhotoCentral Main",
             "support": {
                 "issues": "https://github.com/jesperoestergaardjensen/photocentral-storage/issues",
-                "source": "https://github.com/jesperoestergaardjensen/photocentral-storage/tree/v0.0.3-alpha"
+                "source": "https://github.com/jesperoestergaardjensen/photocentral-storage/tree/main"
             },
-            "time": "2021-12-23T00:16:23+00:00"
+            "time": "2021-12-26T23:17:00+00:00"
         }
     ],
     "packages-dev": [
@@ -580,12 +580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "e0c5a565a1a1f71c83f3daf228e5a25f6670299a"
+                "reference": "746c4b88e16df67b459a82894d29e490b39c4a2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/e0c5a565a1a1f71c83f3daf228e5a25f6670299a",
-                "reference": "e0c5a565a1a1f71c83f3daf228e5a25f6670299a",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/746c4b88e16df67b459a82894d29e490b39c4a2c",
+                "reference": "746c4b88e16df67b459a82894d29e490b39c4a2c",
                 "shasum": ""
             },
             "require": {
@@ -649,7 +649,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-22T13:14:58+00:00"
+            "time": "2021-12-26T08:30:51+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -898,12 +898,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2406855036db1102126125537adb1406f7242fdd"
+                "reference": "9f0695e7665b6d06302d98062d6d234fe676791d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2406855036db1102126125537adb1406f7242fdd",
-                "reference": "2406855036db1102126125537adb1406f7242fdd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9f0695e7665b6d06302d98062d6d234fe676791d",
+                "reference": "9f0695e7665b6d06302d98062d6d234fe676791d",
                 "shasum": ""
             },
             "require": {
@@ -981,7 +981,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.11"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5"
             },
             "funding": [
                 {
@@ -993,7 +993,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-25T07:07:57+00:00"
+            "time": "2021-12-26T08:30:22+00:00"
         },
         {
             "name": "sebastian/cli-parser",
