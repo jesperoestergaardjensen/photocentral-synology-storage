@@ -106,6 +106,6 @@ class SynologyStorage implements PhotoCentralStorage
 
     private function getBaseUrl(): string
     {
-        return '//' . $this->photo_storage_host_address . $this->base_path;
+        return $this->photo_storage_host_address . $this->base_path;
     }
 }
