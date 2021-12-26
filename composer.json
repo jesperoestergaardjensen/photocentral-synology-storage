@@ -5,7 +5,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.4",
-        "jesperoestergaardjensen/photocentral-storage" : "dev-main"
+        "jesperoestergaardjensen/photocentral-storage" : "dev-main",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
