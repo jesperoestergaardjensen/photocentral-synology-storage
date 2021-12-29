@@ -48,14 +48,14 @@ class SynologyStorage implements PhotoCentralStorage
         $photo_filters_array = null;
         if (is_array($photo_filters)) {
             foreach ($photo_filters as $photo_filter) {
-                $photo_filters_array[] = $photo_filter->toArray();
+                $photo_filters_array[get_class($photo_filter)] = $photo_filter->toArray();
             }
         }
 
         $photo_sorting_parameters_array = null;
         if (is_array($photo_sorting_parameters)) {
             foreach ($photo_sorting_parameters as $photo_sorting_parameter) {
-                $photo_sorting_parameters_array[] = $photo_sorting_parameter->toArray();
+                $photo_sorting_parameters_array[get_class($photo_sorting_parameter)] = $photo_sorting_parameter->toArray();
             }
         }
 
@@ -124,10 +124,10 @@ class SynologyStorage implements PhotoCentralStorage
         $post_parameters = [
             'photo_uuid'          => $photo_uuid,
             'photo_collection_id' => $photo_collection_id,
-            'image_dimensions'    => $image_dimensions,
+            'image_dimensions'    => $image_dimensions->toArray(),
         ];
 
-        return $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        return $this->photo_storage_host_address . "/". $this->doPostRequestWithJsonResponse($url, $post_parameters);
     }
 
     private function doPostRequestWithJsonResponse(string $url, array $post_parameters)
