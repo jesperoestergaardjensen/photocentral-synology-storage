@@ -5,6 +5,7 @@ namespace PhotoCentralSynologyStorageClient;
 use PhotoCentralStorage\Model\ImageDimensions;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
+use PhotoCentralStorage\PhotoCollection;
 
 class SynologyStorage implements PhotoCentralStorage
 {
@@ -23,8 +24,8 @@ class SynologyStorage implements PhotoCentralStorage
     {
         $url = $this->getBaseUrl() . '/Search.php';
         $post_parameters = [
-            'search_string' => $search_string,
-            'limit'         => $limit,
+            'search_string'            => $search_string,
+            'limit'                    => $limit,
             'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
@@ -41,14 +42,49 @@ class SynologyStorage implements PhotoCentralStorage
         array $photo_filters = null,
         array $photo_sorting_parameters = null,
         int $limit = 5
-    ): array
-    {
-        return [];
+    ): array {
+        $url = $this->getBaseUrl() . '/ListPhotos.php';
+
+        $photo_filters_array = null;
+        if (is_array($photo_filters)) {
+            foreach ($photo_filters as $photo_filter) {
+                $photo_filters_array[] = $photo_filter->toArray();
+            }
+        }
+
+        $photo_sorting_parameters_array = null;
+        if (is_array($photo_sorting_parameters)) {
+            foreach ($photo_sorting_parameters as $photo_sorting_parameter) {
+                $photo_sorting_parameters_array[] = $photo_sorting_parameter->toArray();
+            }
+        }
+
+        $post_parameters = [
+            'photo_filters'            => $photo_filters_array,
+            'photo_sorting_parameters' => $photo_sorting_parameters_array,
+            'limit'                    => $limit,
+        ];
+
+        $photo_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_list = [];
+        foreach ($photo_list_array as $photo_array) {
+            $photo_list[] = Photo::fromArray($photo_array);
+        }
+
+        return $photo_list;
     }
 
     public function getPhoto(string $photo_uuid, string $photo_collection_id): Photo
     {
-        return new Photo('abc', '1', 100, 200, 0, time(), time(), null, null, null, null);
+        $url = $this->getBaseUrl() . '/GetPhoto.php';
+        $post_parameters = [
+            'photo_uuid'          => $photo_uuid,
+            'photo_collection_id' => $photo_collection_id,
+        ];
+
+        $photo_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+
+        return Photo::fromArray($photo_array);
     }
 
     public function softDeletePhoto(string $photo_uuid): bool
@@ -63,7 +99,19 @@ class SynologyStorage implements PhotoCentralStorage
 
     public function listPhotoCollections(int $limit): array
     {
-        return [];
+        $url = $this->getBaseUrl() . '/ListPhotoCollections.php';
+        $post_parameters = [
+            'limit' => $limit,
+        ];
+
+        $photo_collection_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_collection_list = [];
+
+        foreach ($photo_collection_list_array as $photo_collection_array) {
+            $photo_collection_list[] = PhotoCollection::fromArray($photo_collection_array);
+        }
+
+        return $photo_collection_list;
     }
 
     public function getPhotoPath(

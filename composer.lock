@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jesperoestergaardjensen/photocentral-storage.git",
-                "reference": "70c2046e398f813f82472eb23df94e312910ea8d"
+                "reference": "99790c0b8ed1f0005f46aa47797b83c6b629fe29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/70c2046e398f813f82472eb23df94e312910ea8d",
-                "reference": "70c2046e398f813f82472eb23df94e312910ea8d",
+                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/99790c0b8ed1f0005f46aa47797b83c6b629fe29",
+                "reference": "99790c0b8ed1f0005f46aa47797b83c6b629fe29",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "issues": "https://github.com/jesperoestergaardjensen/photocentral-storage/issues",
                 "source": "https://github.com/jesperoestergaardjensen/photocentral-storage/tree/main"
             },
-            "time": "2021-12-26T23:17:00+00:00"
+            "time": "2021-12-27T23:36:18+00:00"
         }
     ],
     "packages-dev": [
@@ -403,12 +403,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "fd033934972daf855e062f1bf38abd3e79dd08ed"
+                "reference": "21481a5c97e8332f7279e31219c32faa2da21c79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/fd033934972daf855e062f1bf38abd3e79dd08ed",
-                "reference": "fd033934972daf855e062f1bf38abd3e79dd08ed",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/21481a5c97e8332f7279e31219c32faa2da21c79",
+                "reference": "21481a5c97e8332f7279e31219c32faa2da21c79",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +453,7 @@
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
                 "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
             },
-            "time": "2021-12-21T15:04:07+00:00"
+            "time": "2021-12-27T22:36:43+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
