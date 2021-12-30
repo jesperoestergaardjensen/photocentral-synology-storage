@@ -127,10 +127,10 @@ class SynologyStorage implements PhotoCentralStorage
             'image_dimensions'    => $image_dimensions->toArray(),
         ];
 
-        return $this->photo_storage_host_address . "/". $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        return $this->photo_storage_host_address . $this->doPostRequestWithJsonResponse($url, $post_parameters);
     }
 
-    private function doPostRequestWithJsonResponse(string $url, array $post_parameters)
+    private function doPostRequestWithJsonResponse(string $url, array $post_parameters, $debug = false)
     {
         // Set the POST data
         $post_options = $this->getPOSTOptions($post_parameters);
@@ -140,7 +140,14 @@ class SynologyStorage implements PhotoCentralStorage
 
         $json = file_get_contents($url, false, $context);
 
-        return json_decode($json, true);
+        if ($debug === true) {
+            ini_set('xdebug.var_display_max_depth', 10);
+            ini_set('xdebug.var_display_max_children', 256);
+            ini_set('xdebug.var_display_max_data', 1024);
+            var_dump($json); die();
+        } else {
+            return json_decode($json, true);
+        }
     }
 
     private function getPOSTOptions(array $post_data): array
