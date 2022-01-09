@@ -10,14 +10,17 @@ use PhotoCentralStorage\PhotoCollection;
 class SynologyStorage implements PhotoCentralStorage
 {
     private ?string $photo_storage_host_address;
-    private string $base_path;
+    private string $server_base_path;
+    private string $client_photo_cache_path;
 
     public function __construct(
         string $photo_storage_host_address = null,
-        string $base_path = '/photocentral-storage/public'
+        string $server_base_path = '/photocentral-storage/public',
+        string $client_photo_cache_path = '/photos/cache/synology/'
     ) {
         $this->photo_storage_host_address = $photo_storage_host_address;
-        $this->base_path = $base_path;
+        $this->server_base_path = $server_base_path;
+        $this->client_photo_cache_path = $client_photo_cache_path;
     }
 
     public function searchPhotos(string $search_string, ?array $photo_collection_id_list, int $limit = 10): array
@@ -168,6 +171,16 @@ class SynologyStorage implements PhotoCentralStorage
 
     private function getBaseUrl(): string
     {
-        return $this->photo_storage_host_address . $this->base_path;
+        return $this->photo_storage_host_address . $this->server_base_path;
+    }
+
+    public function setPhotoCachePath(string $photo_cache_path): void
+    {
+        $this->client_photo_cache_path = $photo_cache_path;
+    }
+
+    public function getPhotoCachePath(): string
+    {
+        return $this->client_photo_cache_path;
     }
 }

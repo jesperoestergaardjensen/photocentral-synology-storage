@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jesperoestergaardjensen/photocentral-storage.git",
-                "reference": "99790c0b8ed1f0005f46aa47797b83c6b629fe29"
+                "reference": "9bbd24f441ded84d1b05bf45ce5d90d290cc1068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/99790c0b8ed1f0005f46aa47797b83c6b629fe29",
-                "reference": "99790c0b8ed1f0005f46aa47797b83c6b629fe29",
+                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/9bbd24f441ded84d1b05bf45ce5d90d290cc1068",
+                "reference": "9bbd24f441ded84d1b05bf45ce5d90d290cc1068",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,7 @@
                 "php": "^7.4"
             },
             "require-dev": {
+                "jesperoestergaardjensen/exif-samples": "1.0.0",
                 "phpunit/phpunit": "^9.5"
             },
             "default-branch": true,
@@ -44,7 +45,7 @@
                 "issues": "https://github.com/jesperoestergaardjensen/photocentral-storage/issues",
                 "source": "https://github.com/jesperoestergaardjensen/photocentral-storage/tree/main"
             },
-            "time": "2021-12-27T23:36:18+00:00"
+            "time": "2022-01-09T15:27:15+00:00"
         }
     ],
     "packages-dev": [
@@ -461,12 +462,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "f8ec4ab631de5a97769e66b13418c3b8b24e81f4"
+                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/f8ec4ab631de5a97769e66b13418c3b8b24e81f4",
-                "reference": "f8ec4ab631de5a97769e66b13418c3b8b24e81f4",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/93ebd0014cab80c4ea9f5e297ea48672f1b87706",
+                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706",
                 "shasum": ""
             },
             "require": {
@@ -502,9 +503,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.x"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.0"
             },
-            "time": "2021-11-24T08:29:39+00:00"
+            "time": "2022-01-04T19:58:01+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -580,12 +581,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "746c4b88e16df67b459a82894d29e490b39c4a2c"
+                "reference": "7b238df06d528068fc1715542e8099503f077efe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/746c4b88e16df67b459a82894d29e490b39c4a2c",
-                "reference": "746c4b88e16df67b459a82894d29e490b39c4a2c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7b238df06d528068fc1715542e8099503f077efe",
+                "reference": "7b238df06d528068fc1715542e8099503f077efe",
                 "shasum": ""
             },
             "require": {
@@ -649,7 +650,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-26T08:30:51+00:00"
+            "time": "2022-01-09T07:36:03+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -898,12 +899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9f0695e7665b6d06302d98062d6d234fe676791d"
+                "reference": "66a3ec00a8825e9b39444a88ae65454f6bb0d5cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9f0695e7665b6d06302d98062d6d234fe676791d",
-                "reference": "9f0695e7665b6d06302d98062d6d234fe676791d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/66a3ec00a8825e9b39444a88ae65454f6bb0d5cb",
+                "reference": "66a3ec00a8825e9b39444a88ae65454f6bb0d5cb",
                 "shasum": ""
             },
             "require": {
@@ -993,7 +994,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-26T08:30:22+00:00"
+            "time": "2022-01-09T07:33:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -1961,7 +1962,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "dev-main",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -1982,7 +1983,6 @@
             "suggest": {
                 "ext-ctype": "For best performance"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2024,7 +2024,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/main"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.24.0"
             },
             "funding": [
                 {
