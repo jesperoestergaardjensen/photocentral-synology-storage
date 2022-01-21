@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jesperoestergaardjensen/photocentral-storage.git",
-                "reference": "9bbd24f441ded84d1b05bf45ce5d90d290cc1068"
+                "reference": "61b3a04f796b49523cdf0037630e9c5d1f628106"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/9bbd24f441ded84d1b05bf45ce5d90d290cc1068",
-                "reference": "9bbd24f441ded84d1b05bf45ce5d90d290cc1068",
+                "url": "https://api.github.com/repos/jesperoestergaardjensen/photocentral-storage/zipball/61b3a04f796b49523cdf0037630e9c5d1f628106",
+                "reference": "61b3a04f796b49523cdf0037630e9c5d1f628106",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "issues": "https://github.com/jesperoestergaardjensen/photocentral-storage/issues",
                 "source": "https://github.com/jesperoestergaardjensen/photocentral-storage/tree/main"
             },
-            "time": "2022-01-09T15:27:15+00:00"
+            "time": "2022-01-21T23:45:15+00:00"
         }
     ],
     "packages-dev": [
@@ -899,12 +899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "66a3ec00a8825e9b39444a88ae65454f6bb0d5cb"
+                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/66a3ec00a8825e9b39444a88ae65454f6bb0d5cb",
-                "reference": "66a3ec00a8825e9b39444a88ae65454f6bb0d5cb",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93d4bf4c37aec6384bb9e5d390d9049a463a7256",
+                "reference": "93d4bf4c37aec6384bb9e5d390d9049a463a7256",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-09T07:33:51+00:00"
+            "time": "2022-01-21T05:54:47+00:00"
         },
         {
             "name": "sebastian/cli-parser",

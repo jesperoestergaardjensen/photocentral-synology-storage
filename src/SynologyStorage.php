@@ -2,6 +2,7 @@
 
 namespace PhotoCentralSynologyStorageClient;
 
+use PhotoCentralStorage\Exception\PhotoCentralStorageException;
 use PhotoCentralStorage\Model\ImageDimensions;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
@@ -9,17 +10,17 @@ use PhotoCentralStorage\PhotoCollection;
 
 class SynologyStorage implements PhotoCentralStorage
 {
-    private ?string $photo_storage_host_address;
-    private string $server_base_path;
-    private string $client_photo_cache_path;
+    private ?string $synology_nas_host_address;
+    private string $synology_base_path;
+    private ?string $client_photo_cache_path;
 
     public function __construct(
-        string $photo_storage_host_address = null,
-        string $server_base_path = '/photocentral-storage/public',
+        string $synology_nas_host_address = null,
+        string $synology_nas_base_path = '/photocentral-storage/public',
         string $client_photo_cache_path = '/photos/cache/synology/'
     ) {
-        $this->photo_storage_host_address = $photo_storage_host_address;
-        $this->server_base_path = $server_base_path;
+        $this->synology_nas_host_address = $synology_nas_host_address;
+        $this->synology_base_path = $synology_nas_base_path;
         $this->client_photo_cache_path = $client_photo_cache_path;
     }
 
@@ -117,20 +118,12 @@ class SynologyStorage implements PhotoCentralStorage
         return $photo_collection_list;
     }
 
-    public function getPhotoPath(
+    public function getPathOrUrlToPhoto(
         string $photo_uuid,
-        string $photo_collection_id,
-        ImageDimensions $image_dimensions
+        ImageDimensions $image_dimensions,
+        ?string $photo_collection_id
     ): string {
-        $url = $this->getBaseUrl() . '/GetPhotoPath.php';
-
-        $post_parameters = [
-            'photo_uuid'          => $photo_uuid,
-            'photo_collection_id' => $photo_collection_id,
-            'image_dimensions'    => $image_dimensions->toArray(),
-        ];
-
-        return $this->photo_storage_host_address . $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        return "{$this->synology_nas_host_address}{$this->synology_base_path}/DisplayPhoto.php?photo_uuid={$photo_uuid}&image_dimensions_id={$image_dimensions->getId()}";
     }
 
     private function doPostRequestWithJsonResponse(string $url, array $post_parameters, $debug = false)
@@ -171,16 +164,38 @@ class SynologyStorage implements PhotoCentralStorage
 
     private function getBaseUrl(): string
     {
-        return $this->photo_storage_host_address . $this->server_base_path;
+        return $this->synology_nas_host_address . $this->synology_base_path;
     }
 
-    public function setPhotoCachePath(string $photo_cache_path): void
+    public function setPhotoCache(string $photo_cache_path): void
     {
         $this->client_photo_cache_path = $photo_cache_path;
     }
 
-    public function getPhotoCachePath(): string
+    public function getPhotoCache(): string
     {
         return $this->client_photo_cache_path;
+    }
+
+    /**
+     * Will return a path to the photo in the following format:
+     *
+     * /client_photo_cache_path/image_dimension_id/photo_uuid.jpg
+     * e.g.
+     * /home/var/wwww/photo-project/public/photos/thumb/935697d459fb3b54f7754a2a369e7e0e.jpg
+     *
+     * @throws PhotoCentralStorageException
+     */
+    public function getPathOrUrlToCachedPhoto(
+        string $photo_uuid,
+        ImageDimensions $image_dimensions,
+        ?string $photo_collection_id
+    ): string
+    {
+        if ($this->client_photo_cache_path === null) {
+            throw new PhotoCentralStorageException('No cache pach set');
+        } else {
+            return $this->client_photo_cache_path . DIRECTORY_SEPARATOR . $image_dimensions->getId() . DIRECTORY_SEPARATOR . $photo_uuid . ".jpg"; // TODO : Could this be handled better?
+        }
     }
 }
