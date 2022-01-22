@@ -17,7 +17,7 @@ class SynologyStorage implements PhotoCentralStorage
     public function __construct(
         string $synology_nas_host_address = null,
         string $synology_nas_base_path = '/photocentral-storage/public',
-        string $client_photo_cache_path = '/photos/cache/synology/'
+        ?string $client_photo_cache_path = '/photos/cache/synology/'
     ) {
         $this->synology_nas_host_address = $synology_nas_host_address;
         $this->synology_base_path = $synology_nas_base_path;
@@ -123,7 +123,7 @@ class SynologyStorage implements PhotoCentralStorage
         ImageDimensions $image_dimensions,
         ?string $photo_collection_id
     ): string {
-        return "{$this->synology_nas_host_address}{$this->synology_base_path}/DisplayPhoto.php?photo_uuid={$photo_uuid}&image_dimensions_id={$image_dimensions->getId()}";
+        return "{$this->getBaseUrl()}/DisplayPhoto.php?photo_uuid={$photo_uuid}&image_dimensions_id={$image_dimensions->getId()}";
     }
 
     private function doPostRequestWithJsonResponse(string $url, array $post_parameters, $debug = false)
@@ -167,12 +167,12 @@ class SynologyStorage implements PhotoCentralStorage
         return $this->synology_nas_host_address . $this->synology_base_path;
     }
 
-    public function setPhotoCache(string $photo_cache_path): void
+    public function setPhotoCache(?string $photo_cache_path): void
     {
         $this->client_photo_cache_path = $photo_cache_path;
     }
 
-    public function getPhotoCache(): string
+    public function getPhotoCache(): ?string
     {
         return $this->client_photo_cache_path;
     }
