@@ -189,13 +189,13 @@ class SynologyStorage implements PhotoCentralStorage
     public function getPathOrUrlToCachedPhoto(
         string $photo_uuid,
         ImageDimensions $image_dimensions,
-        ?string $photo_collection_id
+        string $photo_collection_id
     ): string
     {
         if ($this->client_photo_cache_path === null) {
             throw new PhotoCentralStorageException('No cache pach set');
         } else {
-            return $this->client_photo_cache_path . DIRECTORY_SEPARATOR . $image_dimensions->getId() . DIRECTORY_SEPARATOR . $photo_uuid . ".jpg"; // TODO : Could this be handled better?
+            return $this->client_photo_cache_path . $photo_collection_id . DIRECTORY_SEPARATOR . $image_dimensions->getId() . DIRECTORY_SEPARATOR . $photo_uuid . ".jpg"; // TODO : Could this be handled better?
         }
     }
 }
