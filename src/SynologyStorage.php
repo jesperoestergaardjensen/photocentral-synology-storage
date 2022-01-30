@@ -4,6 +4,9 @@ namespace PhotoCentralSynologyStorageClient;
 
 use PhotoCentralStorage\Exception\PhotoCentralStorageException;
 use PhotoCentralStorage\Model\ImageDimensions;
+use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityDay;
+use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityMonth;
+use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityYear;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
 use PhotoCentralStorage\PhotoCollection;
@@ -197,5 +200,56 @@ class SynologyStorage implements PhotoCentralStorage
         } else {
             return $this->client_photo_cache_path . $photo_collection_id . DIRECTORY_SEPARATOR . $image_dimensions->getId() . DIRECTORY_SEPARATOR . $photo_uuid . ".jpg"; // TODO : Could this be handled better?
         }
+    }
+
+    public function listPhotoQuantityByYear(?array $photo_collection_id_list): array
+    {
+        $url = $this->getBaseUrl() . '/ListPhotoQuantityByYear.php';
+        $post_parameters = [
+            'photo_collection_id_list' => $photo_collection_id_list,
+        ];
+
+        $photo_quantity_year_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_year_list = [];
+        foreach ($photo_quantity_year_list_array as $photo_quantity_year_array) {
+            $photo_quantity_year_list[] = PhotoQuantityYear::fromArray($photo_quantity_year_array);
+        }
+
+        return $photo_quantity_year_list;
+    }
+
+    public function listPhotoQuantityByMonth(int $year, ?array $photo_collection_id_list): array
+    {
+        $url = $this->getBaseUrl() . '/ListPhotoQuantityByMonth.php';
+        $post_parameters = [
+            'year' => $year,
+            'photo_collection_id_list' => $photo_collection_id_list,
+        ];
+
+        $photo_quantity_month_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_month_list = [];
+        foreach ($photo_quantity_month_list_array as $photo_quantity_month_array) {
+            $photo_quantity_month_list[] = PhotoQuantityMonth::fromArray($photo_quantity_month_array);
+        }
+
+        return $photo_quantity_month_list;
+    }
+
+    public function listPhotoQuantityByDay(int $month, int $year, ?array $photo_collection_id_list): array
+    {
+        $url = $this->getBaseUrl() . '/ListPhotoQuantityByDay.php';
+        $post_parameters = [
+            'year' => $year,
+            'month' => $month,
+            'photo_collection_id_list' => $photo_collection_id_list,
+        ];
+
+        $photo_quantity_day_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_day_list = [];
+        foreach ($photo_quantity_day_list_array as $photo_quantity_day_array) {
+            $photo_quantity_day_list[] = PhotoQuantityDay::fromArray($photo_quantity_day_array);
+        }
+
+        return $photo_quantity_day_list;
     }
 }
