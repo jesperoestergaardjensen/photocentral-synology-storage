@@ -10,21 +10,25 @@ use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityYear;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
 use PhotoCentralStorage\PhotoCollection;
+use function PHPUnit\Framework\isNull;
 
 class SynologyStorage implements PhotoCentralStorage
 {
     private ?string $synology_nas_host_address;
     private string $synology_base_path;
     private ?string $client_photo_cache_path;
+    private HttpRequestService $http_request_service;
 
     public function __construct(
         string $synology_nas_host_address = null,
         string $synology_nas_base_path = '/photocentral-storage/public',
-        ?string $client_photo_cache_path = '/photos/cache/synology/'
+        ?string $client_photo_cache_path = '/photos/cache/synology/',
+        ?HttpRequestService $http_request_service = null
     ) {
         $this->synology_nas_host_address = $synology_nas_host_address;
         $this->synology_base_path = $synology_nas_base_path;
         $this->client_photo_cache_path = $client_photo_cache_path;
+        $this->http_request_service = isNull($http_request_service) ? $http_request_service : new HttpRequestService();
     }
 
     public function searchPhotos(string $search_string, ?array $photo_collection_id_list, int $limit = 10): array
@@ -36,7 +40,7 @@ class SynologyStorage implements PhotoCentralStorage
             'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
-        $photo_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_list = [];
         foreach ($photo_list_array as $photo_array) {
             $photo_list[] = Photo::fromArray($photo_array);
@@ -72,7 +76,7 @@ class SynologyStorage implements PhotoCentralStorage
             'limit'                    => $limit,
         ];
 
-        $photo_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_list = [];
         foreach ($photo_list_array as $photo_array) {
             $photo_list[] = Photo::fromArray($photo_array);
@@ -89,7 +93,7 @@ class SynologyStorage implements PhotoCentralStorage
             'photo_collection_id' => $photo_collection_id,
         ];
 
-        $photo_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
 
         return Photo::fromArray($photo_array);
     }
@@ -111,7 +115,7 @@ class SynologyStorage implements PhotoCentralStorage
             'limit' => $limit,
         ];
 
-        $photo_collection_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_collection_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_collection_list = [];
 
         foreach ($photo_collection_list_array as $photo_collection_array) {
@@ -127,42 +131,6 @@ class SynologyStorage implements PhotoCentralStorage
         ?string $photo_collection_id
     ): string {
         return "{$this->getBaseUrl()}/DisplayPhoto.php?photo_uuid={$photo_uuid}&image_dimensions_id={$image_dimensions->getId()}";
-    }
-
-    private function doPostRequestWithJsonResponse(string $url, array $post_parameters, $debug = false)
-    {
-        // Set the POST data
-        $post_options = $this->getPOSTOptions($post_parameters);
-
-        // Create the POST context
-        $context = stream_context_create($post_options);
-
-        $json = file_get_contents($url, false, $context);
-
-        if ($debug === true) {
-            ini_set('xdebug.var_display_max_depth', 10);
-            ini_set('xdebug.var_display_max_children', 256);
-            ini_set('xdebug.var_display_max_data', 1024);
-            var_dump($json); die();
-        } else {
-            return json_decode($json, true);
-        }
-    }
-
-    private function getPOSTOptions(array $post_data): array
-    {
-        $post_data = http_build_query($post_data);
-
-        // Set the POST options
-        return [
-            'http' =>
-                [
-                    'method'  => 'POST',
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n"
-                        . "Content-Length: " . strlen($post_data) . "\r\n",
-                    'content' => $post_data,
-                ],
-        ];
     }
 
     private function getBaseUrl(): string
@@ -209,7 +177,7 @@ class SynologyStorage implements PhotoCentralStorage
             'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
-        $photo_quantity_year_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_year_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_quantity_year_list = [];
         foreach ($photo_quantity_year_list_array as $photo_quantity_year_array) {
             $photo_quantity_year_list[] = PhotoQuantityYear::fromArray($photo_quantity_year_array);
@@ -226,7 +194,7 @@ class SynologyStorage implements PhotoCentralStorage
             'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
-        $photo_quantity_month_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_month_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_quantity_month_list = [];
         foreach ($photo_quantity_month_list_array as $photo_quantity_month_array) {
             $photo_quantity_month_list[] = PhotoQuantityMonth::fromArray($photo_quantity_month_array);
@@ -244,7 +212,7 @@ class SynologyStorage implements PhotoCentralStorage
             'photo_collection_id_list' => $photo_collection_id_list,
         ];
 
-        $photo_quantity_day_list_array = $this->doPostRequestWithJsonResponse($url, $post_parameters);
+        $photo_quantity_day_list_array = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
         $photo_quantity_day_list = [];
         foreach ($photo_quantity_day_list_array as $photo_quantity_day_array) {
             $photo_quantity_day_list[] = PhotoQuantityDay::fromArray($photo_quantity_day_array);
