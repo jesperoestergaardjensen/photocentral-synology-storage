@@ -100,12 +100,24 @@ class SynologyStorage implements PhotoCentralStorage
 
     public function softDeletePhoto(string $photo_uuid): bool
     {
-        return true;
+        $url = $this->getBaseUrl() . '/SoftDeletePhoto.php';
+        $post_parameters = [
+            'photo_uuid'          => $photo_uuid
+        ];
+
+        $result = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
+        return $result['success'];
     }
 
     public function undoSoftDeletePhoto(string $photo_uuid): bool
     {
-        return true;
+        $url = $this->getBaseUrl() . '/UndoSoftDeletePhoto.php';
+        $post_parameters = [
+            'photo_uuid'          => $photo_uuid
+        ];
+
+        $result = json_decode($this->http_request_service->doPostRequestWithJsonResponse($url, $post_parameters), true);
+        return $result['success'];
     }
 
     public function listPhotoCollections(int $limit): array

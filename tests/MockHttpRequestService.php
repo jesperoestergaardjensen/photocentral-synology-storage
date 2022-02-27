@@ -8,7 +8,7 @@ class MockHttpRequestService extends HttpRequestService
 {
     public string $url;
     public array $post_parameters;
-    public string $json_reponse;
+    public string $json_reponse = '';
 
     public function doPostRequestWithJsonResponse(string $url, array $post_parameters, $debug = false)
     {
