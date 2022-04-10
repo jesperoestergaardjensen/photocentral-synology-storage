@@ -23,12 +23,12 @@ class SynologyStorage implements PhotoCentralStorage
         string $synology_nas_host_address = null,
         string $synology_nas_base_path = '/photocentral-storage/public',
         ?string $client_photo_cache_path = '/photos/cache/synology/',
-        ?HttpRequestService $http_request_service = null
+        HttpRequestService $http_request_service = null
     ) {
         $this->synology_nas_host_address = $synology_nas_host_address;
         $this->synology_base_path = $synology_nas_base_path;
         $this->client_photo_cache_path = $client_photo_cache_path;
-        $this->http_request_service = isNull($http_request_service) ? $http_request_service : new HttpRequestService();
+        $this->http_request_service = $http_request_service ?? new HttpRequestService();
     }
 
     public function searchPhotos(string $search_string, ?array $photo_collection_id_list, int $limit = 10): array
