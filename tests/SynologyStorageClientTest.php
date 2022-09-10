@@ -8,6 +8,8 @@ use PhotoCentralStorage\Model\PhotoFilter\PhotoCollectionIdFilter;
 use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityDay;
 use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityMonth;
 use PhotoCentralStorage\Model\PhotoQuantity\PhotoQuantityYear;
+use PhotoCentralStorage\Model\PhotoSorting\BasicSorting;
+use PhotoCentralStorage\Model\PhotoSorting\SortByPhotoDateTime;
 use PhotoCentralStorage\Photo;
 use PhotoCentralStorage\PhotoCentralStorage;
 use PhotoCentralStorage\PhotoCollection;
@@ -233,8 +235,8 @@ class SynologyStorageClientTest extends PhotoCentralStorageTestBase
         $expected_url_called = $this->host . $this->synology_nas_base_path . '/ListPhotoQuantityByDay.php'; // TODO : improve
         $expected_post_parameters = [
             'photo_collection_id_list' => $this->expected_photo_colletion_id_list,
-            'year' => '2022',
-            'month' => '2'
+            'year' => 2022,
+            'month' => 6
         ];
 
         $expected_photo_quantity_by_day_list_array = [];
@@ -323,7 +325,7 @@ class SynologyStorageClientTest extends PhotoCentralStorageTestBase
         $expected_url_called = $this->host . $this->synology_nas_base_path . '/ListPhotos.php'; // TODO : improve
         $expected_post_parameters = [
             'photo_filters'            => [PhotoCollectionIdFilter::class => (new PhotoCollectionIdFilter($photo_colleciton_id_list))->toArray()],
-            'photo_sorting_parameters' => null,
+            'photo_sorting_parameters' => [SortByPhotoDateTime::class => ['direction' => 'desc']],
             'limit'                    => 2,
         ];
 
